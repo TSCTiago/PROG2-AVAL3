@@ -1,2 +1,2 @@
-# PROG2-AVAL3
- Terceira Avaliação da disciplina de programação II
+A sample command-line application with an entrypoint in `bin/`, library code
+in `lib/`, and example unit test in `test/`.
