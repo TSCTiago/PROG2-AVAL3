@@ -1,7 +1,5 @@
-
 import 'dart:io';
 
-//símbolo, nome em português, nome em latim e peso atômico.
 class Element {
   String symbol;
   String name;
@@ -15,15 +13,13 @@ class Element {
   }
 }
 
-
 class Elements extends Iterable {
   final List<Element> _elements = [];
   final file = File('elements.csv').readAsLinesSync();
- 
-  // file.readAsLinesSync();
+
   Elements() {
     for (int i = 1; i < file.length; i++) {
-    var li = file[i].split(',');
+      var li = file[i].split(',');
       String symbol = li[1];
       String name = li[2];
       String latinName = li[3];
@@ -35,4 +31,5 @@ class Elements extends Iterable {
 
   @override
   Iterator<Element> get iterator => _elements.iterator;
+
 }
