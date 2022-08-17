@@ -18,7 +18,7 @@ class Elements extends Iterable {
   factory Elements() {
     return _instance;
   }
-  final List<Element> elements = [];
+  final List<Element> content = [];
   Elements._privateConstructor() {
     final file = File('elements.csv').readAsLinesSync();
     for (int i = 1; i < file.length; i++) {
@@ -27,18 +27,18 @@ class Elements extends Iterable {
       String name = lineData[2];
       String latinName = lineData[3];
       int weight = int.parse(lineData[0]);
-      elements.add(Element(symbol = symbol, name = name, latinName = latinName,
+      content.add(Element(symbol = symbol, name = name, latinName = latinName,
           weight = weight));
     }
   }
 
   @override
-  Iterator<Element> get iterator => elements.iterator;
+  Iterator<Element> get iterator => content.iterator;
 
   Element filter(String substance) {
     try {
       final listofSelectedElements = Elements()
-          .elements
+          .content
           .where((atom) => atom.symbol == substance)
           .toList();
       return listofSelectedElements[0];
