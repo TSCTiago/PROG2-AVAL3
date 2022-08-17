@@ -22,11 +22,11 @@ class Elements extends Iterable {
   Elements._privateConstructor() {
     final file = File('elements.csv').readAsLinesSync();
     for (int i = 1; i < file.length; i++) {
-      var li = file[i].split(',');
-      String symbol = li[1];
-      String name = li[2];
-      String latinName = li[3];
-      int weight = int.parse(li[0]);
+      var lineData = file[i].split(',');
+      String symbol = lineData[1];
+      String name = lineData[2];
+      String latinName = lineData[3];
+      int weight = int.parse(lineData[0]);
       elements.add(Element(symbol = symbol, name = name, latinName = latinName,
           weight = weight));
     }
