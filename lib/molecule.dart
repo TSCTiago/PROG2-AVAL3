@@ -12,7 +12,7 @@ class Molecule implements Comparable<Molecule>{
 
   set formula(String formula) {
     if (!formula.isNotEmpty){
-      throw Exception('Formula vazia');
+      throw Exception('Fórmula vazia');
     }
     _formula = formula;
     _weigth = 0;
