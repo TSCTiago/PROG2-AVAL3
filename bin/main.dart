@@ -17,8 +17,8 @@
  */
 import 'dart:io';
 
-import 'package:prog2_aval3/chemical/elements.dart';
-import 'package:prog2_aval3/chemical/molecule.dart';
+import 'package:prog2_aval3/elements.dart';
+import 'package:prog2_aval3/molecule.dart';
 
 /*
  * Exibe uma linha na tela

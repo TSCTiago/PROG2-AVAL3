@@ -1,4 +1,4 @@
-import 'package:prog2_aval3/chemical/elements.dart';
+import 'package:prog2_aval3/elements.dart';
 
 class Molecule implements Comparable<Molecule>{
   String _formula = "";
