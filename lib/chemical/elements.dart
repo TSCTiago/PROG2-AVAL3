@@ -1,38 +1,49 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
+import 'package:prog2_aval3/chemical/elements.dart';
 
-import 'dart:io';
+class Molecule implements Comparable<Molecule>{
+  String _formula = "";
+  int _weigth = 0;
+  Elements elements = Elements();
 
-//símbolo, nome em português, nome em latim e peso atômico.
-class Element {
-  String symbol;
-  String name;
-  String latinName;
-  String weight;
-
-  Element(this.symbol, this.name, this.latinName, this.weight);
-  @override
-  String toString() {
-    return symbol;
+  Molecule({required formula,  String? name}){
+    this.formula = formula;
   }
-}
 
-class Elements extends Iterable {
-  final List<Element> _elements = [];
-  final file = File('elements.csv').readAsLinesSync();
- 
-  // file.readAsLinesSync();
-  Elements() {
-    for (int i = 1; i < file.length; i++) {
-    var li = file[i].split(',');
-      String symbol = li[1];
-      String name = li[2];
-      String latinName = li[3];
-      String weight = li[0];
-      _elements.add(Element(symbol = symbol, name = name, latinName = latinName,
-          weight = weight));
+
+  set formula(String formula) {
+    if (formula.isEmpty){
+      throw Exception('Formula vazia');
+    }
+    _formula = formula; //colocar caso de erro
+    RegExp expression = RegExp(r'(?<atom>[A-Z][a-z]?d*)(?<quantity>[0-9]*)');
+
+    Iterable<RegExpMatch> molecules = expression.allMatches(formula.toString());
+
+    for (final atom in molecules) {
+      String number = atom.namedGroup('quantity').toString();
+      if (number == '1'){
+        throw Exception('Fórmula inválida');
+      }
+      int quantity = 1;
+
+      if (number.isNotEmpty) {
+        quantity = int.parse(number);
+      }
+      final currentElement = elements.filter(atom.namedGroup('atom').toString());
+      _weigth += (currentElement.weight * quantity);
     }
   }
 
+  int get weight {
+    return _weigth;
+  }
+
+  String get formula {
+    return _formula;
+  }  
+
   @override
-  Iterator<Element> get iterator => _elements.iterator;
+  int compareTo(Molecule other) {
+    return weight - other.weight;
+  }
 }
