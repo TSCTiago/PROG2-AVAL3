@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
 /*
- * ATENÇÃO: O CÓDIGO DESTE ARQUIVO SERÁ USADO PARA TESTAR
+ * ATENÇÃO O CÓDIGO DESTE ARQUIVO SERÁ USADO PARA TESTAR
  * SUA IMPLEMENTAÇÃO.
  *
  * NÃO ALTERE AS FUNÇÕES NELE EXISTENTES.
  *
  * SEU CÓDIGO DEVERÁ SE ADAPTAR ÀS CHAMADAS
- * AQUI CODIFICADAS.
+ * AQUI CODIFICADOS.
  *
  */
 
@@ -16,10 +16,17 @@
  * adaptarem ao seu projeto
  */
 import 'dart:io';
-//import 'package:chemical/elements.dart';
-//import 'package:chemical/molecule.dart';
+
 import 'package:prog2_aval3/chemical/elements.dart';
 import 'package:prog2_aval3/chemical/molecule.dart';
+
+/*
+ * Exibe uma linha na tela
+ */
+void line([int size = 40]) {
+  stdout.write('-' * size);
+  stdout.write('\n');
+}
 
 /*
  * Exibe texto tabulado no console
@@ -57,7 +64,7 @@ void printTabbed(
  * Zn     Zinco        Zincum           30
  * Zr     Zircônio     Zirconium        40
  */
-/*void showElements() {
+void showElements() {
   const tabs = [7, 13, 13, -6];
   Elements elements = Elements();
 
@@ -68,8 +75,8 @@ void printTabbed(
       printTabbed(text, tabs);
     },
   );
-  print('-' * 40);
-}*/
+  line();
+}
 
 /*
  * Exibe a fórmula e o nome das moléculas da lista
@@ -96,7 +103,32 @@ void showMolecules(List<Molecule> molecules) {
   for (var molecule in molecules) {
     printTabbed('${molecule.formula}\t${molecule.weight}', tabs);
   }
-  print('-' * 40);
+  line();
+}
+
+/*
+ * Test a criação e alteração de uma molécula
+ * for meio do getter/setter "formula"
+ */
+void testMolecule() {
+  Molecule molecule;
+
+  // Cria molécula
+  molecule = Molecule(
+    formula: 'C6H12O6',
+    name: 'Molécula',
+  );
+
+  print('Fórmula: ${molecule.formula}');
+  print('Peso   : ${molecule.weight}');
+
+  // Altera molécula
+  molecule.formula = 'CH3COOH';
+
+  print('Fórmula: ${molecule.formula}');
+  print('Peso   : ${molecule.weight}');
+
+  line();
 }
 
 /*
@@ -104,7 +136,7 @@ void showMolecules(List<Molecule> molecules) {
  * fórmula inválida.
  *
  */
-/*void createInvalidMolecule(String formula, String name) {
+void createInvalidMolecule(String formula, String name) {
   try {
     final molecule = Molecule(
       formula: formula,
@@ -117,11 +149,14 @@ void showMolecules(List<Molecule> molecules) {
   } catch (_) {
     print('Fórmula inválida: "$formula" ($name)');
   }
-}*/
+}
 
 void main() {
   // Exibe uma tabela com todos os elementos químicos
-  //showElements();
+  showElements();
+
+  // Testa a criação e alteração de uma instância de molécula
+  testMolecule();
 
   // Lista de moléculas válidas
   final molecules = [
@@ -145,14 +180,14 @@ void main() {
 
   // Ordena as moléculas da lista em ordem
   // crescente de peso de peso atômico
-  //molecules.sort();
+  molecules.sort();
 
   // Exibe uma tabela com a fórmula e peso das
   // moléculas da lista em ordem crescente de peso atômico
-  //showMolecules(molecules);
+  showMolecules(molecules);
 
   // Tenta criar moléculas com fórmulas inválidas
-  /*createInvalidMolecule('', 'Fórmula vazia');
+  createInvalidMolecule('', 'Fórmula vazia');
   createInvalidMolecule('H2O1', 'Fórmula inválida da água: "1"');
-  createInvalidMolecule('G2H5', 'Fórmula com elemento inexistente: "G"');*/
+  createInvalidMolecule('G2H5', 'Fórmula com elemento inexistente: "G"');
 }

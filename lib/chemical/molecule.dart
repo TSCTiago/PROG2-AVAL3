@@ -1,39 +1,50 @@
-class Molecule {
-  late String _formula;
-  String name;
-  dynamic _weigth;
+import 'package:prog2_aval3/chemical/elements.dart';
 
-  Molecule({ required formula, required this.name}){
+class Molecule implements Comparable<Molecule>{
+  String _formula = "";
+  int _weigth = 0;
+  Elements elements = Elements();
+
+  Molecule({required formula,  String? name}){
     this.formula = formula;
   }
 
 
   set formula(String formula) {
-    _formula = formula; //colocar caso de erro
+    if (formula.isEmpty){
+      throw Exception('Formula vazia');
+    }
+    _formula = formula;
+    _weigth = 0;
     RegExp expression = RegExp(r'(?<atom>[A-Z][a-z]?d*)(?<quantity>[0-9]*)');
 
     Iterable<RegExpMatch> molecules = expression.allMatches(formula.toString());
 
-    final List<Map<String, dynamic>> atomos = [];
-
     for (final atom in molecules) {
-
-      dynamic quantity = atom.namedGroup('quantity');
-      if (quantity == '') {
-        quantity = 1;
+      String number = atom.namedGroup('quantity').toString();
+      if (number == '1'){
+        throw Exception('Fórmula inválida');
       }
-      print(int.parse(quantity));
-      _weigth = quantity;
-      atomos.add({'atomo': atom.namedGroup('atom'), 'quantity': quantity});
+      int quantity = 1;
+
+      if (number.isNotEmpty) {
+        quantity = int.parse(number);
+      }
+      final currentElement = elements.filter(atom.namedGroup('atom').toString());
+      _weigth += (currentElement.weight * quantity);
     }
   }
 
   int get weight {
-    return 1;
+    return _weigth;
   }
-  //String get formula => formula;
-  //
+
   String get formula {
     return _formula;
+  }  
+
+  @override
+  int compareTo(Molecule other) {
+    return weight - other.weight;
   }
 }
