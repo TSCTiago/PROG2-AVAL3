@@ -24,9 +24,9 @@ class Molecule implements Comparable<Molecule>{
       
       int quantity = 1;
       String number = atom.namedGroup('quantity').toString();
-      
+      String elem = atom.namedGroup('atom').toString();
       if (number == '1'){
-        throw Exception('Fórmula inválida');
+        throw Exception('Fórmula inválida do elemento $elem$number : "1"');
       }
       
       if (number.isNotEmpty) {
