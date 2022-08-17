@@ -8,7 +8,7 @@ class Elements extends Iterable {
   }
   final List<Element> content = [];
   Elements._privateConstructor() {
-    final file = File('elements.csv').readAsLinesSync();
+    final file = File('file/elements.csv').readAsLinesSync();
     for (int i = 1; i < file.length; i++) {
       var lineData = file[i].split(',');
       String symbol = lineData[1];
